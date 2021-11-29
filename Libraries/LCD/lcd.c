@@ -17,36 +17,32 @@ uint16_t DeviceCode;
 static void LCD_WR_REG(uint16_t LCD_Reg)
 {
 	// TODO implement using GPIO_ResetBits/GPIO_SetBits
-	// 10주차 강의자료 11페이지 참고
-
-	// Command
-	GPIO_ResetBits(GPIOC, GPIO_Pin_6);  // LCD_CS(0)
-	GPIO_SetBits(GPIOD, GPIO_Pin_15);   // LCD_RD(1)
-	GPIO_ResetBits(GPIOD, GPIO_Pin_13); // LCD_RS(0)
-	GPIO_ResetBits(GPIOD, GPIO_Pin_14); // LCD_WR(0)
-
+        GPIO_SetBits(GPIOD, GPIO_Pin_15);
+	GPIO_ResetBits(GPIOC, GPIO_Pin_6); 
+        GPIO_ResetBits(GPIOD, GPIO_Pin_13);
+        GPIO_ResetBits(GPIOD, GPIO_Pin_14);
+        
 	GPIO_Write(GPIOE, LCD_Reg);
-
+        
 	// TODO implement using GPIO_ResetBits/GPIO_SetBits
-	GPIO_SetBits(GPIOC, GPIO_Pin_6);  // LCD_CS(1)
-	GPIO_SetBits(GPIOD, GPIO_Pin_14); // LCD_WR(1)
+        GPIO_SetBits(GPIOC, GPIO_Pin_6);
+	GPIO_SetBits(GPIOD, GPIO_Pin_14);
 }
 
 static void LCD_WR_DATA(uint16_t LCD_Data)
 {
 	// TODO implement using GPIO_ResetBits/GPIO_SetBits
-
-	// Data
-	GPIO_ResetBits(GPIOC, GPIO_Pin_6);  // LCD_CS(0)
-	GPIO_SetBits(GPIOD, GPIO_Pin_15);   // LCD_RD(1)
-	GPIO_SetBits(GPIOD, GPIO_Pin_13); // LCD_RS(1)
-	GPIO_ResetBits(GPIOD, GPIO_Pin_14); // LCD_WR(0)
+  	GPIO_ResetBits(GPIOC, GPIO_Pin_6);
+        GPIO_SetBits(GPIOD, GPIO_Pin_15);
+        GPIO_SetBits(GPIOD, GPIO_Pin_13);
+        GPIO_ResetBits(GPIOD, GPIO_Pin_14);
 	
 	GPIO_Write(GPIOE, LCD_Data);
-
+        
 	// TODO implement using GPIO_ResetBits/GPIO_SetBits
-	GPIO_SetBits(GPIOC, GPIO_Pin_6);  // LCD_CS(1)
-	GPIO_SetBits(GPIOD, GPIO_Pin_14); // LCD_WR(1)
+        GPIO_SetBits(GPIOC, GPIO_Pin_6);
+	GPIO_SetBits(GPIOD, GPIO_Pin_14);
+	
 }
 
 static uint16_t LCD_ReadReg(uint16_t LCD_Reg)
