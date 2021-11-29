@@ -1,7 +1,7 @@
 #include "nemo.h"
 
 int stageNumber = 0;
-//여기 수정된 거 나중에 올리기
+
 void joystickStageScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)
 {
     if (EXTI_GetITStatus(EXTI_Line) != RESET)
