@@ -8,7 +8,7 @@ void RCC_Configure(void)
     // Joystick PC2, 3, 4, 5
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
 
-    // Alter
+    // Alter function
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
 }
 
