@@ -9,7 +9,7 @@ void Delay(int n)
 
 int main(void)
 {
-	configure();
+  configure();
 
   LCD_Init();
   LCD_Clear(WHITE);

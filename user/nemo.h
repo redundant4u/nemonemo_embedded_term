@@ -10,7 +10,6 @@
 #include "touch.h"
 #include <time.h>
 
-
 #define START_TEXT_X 70
 #define START_TEXT_Y 100
 
@@ -33,6 +32,7 @@ void EXTI2_IRQHandler(void);
 void EXTI3_IRQHandler(void);
 void EXTI4_IRQHandler(void);
 void EXTI9_5_IRQHandler(void);
+void EXTI15_10_IRQHandler(void);
 
 // mainScreen.c
 void joystickMainScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
