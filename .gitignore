@@ -4,6 +4,8 @@
 **/.DS_Store
 **/._.DS_Store
 
-CoreSupport
-Libraries
-settings
+# debug files
+settings/*Debug*
+
+# 
+*.dep
