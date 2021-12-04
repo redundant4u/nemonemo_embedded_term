@@ -4,8 +4,15 @@
 **/.DS_Store
 **/._.DS_Store
 
-# debug files
+# Debug
+Debug/
+
+# debug files in setttings
 settings/*Debug*
+settings/*.dbgdt
+settings/*.wsdt
+
+settings/*.dnx
 
 # 
 *.dep
