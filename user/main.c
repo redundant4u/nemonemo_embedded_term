@@ -1,5 +1,7 @@
 #include "nemo.h"
 
+int stateScreen = SCR_MAIN;
+
 void Delay(int n)
 {
   time_t current = clock();
@@ -14,7 +16,7 @@ int main(void)
   LCD_Init();
   LCD_Clear(WHITE);
 
-  stageScreen();
+  mainScreen();
 
   while (1)
   {

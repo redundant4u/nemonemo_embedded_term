@@ -1,30 +1,81 @@
 #include "nemo.h"
 
+extern int stateScreen;
+
 void EXTI2_IRQHandler(void)
 {
     // Joystic DOWN
-    joystickMainScreen(EXTI_Line2, GPIOC, GPIO_Pin_2);
+    switch(stateScreen)
+    {
+        case SCR_MAIN:
+            joystickMainScreen(EXTI_Line2, GPIOC, GPIO_Pin_2);
+            break;
+        case SCR_PAGE:
+            joystickStageScreen(EXTI_Line2, GPIOC, GPIO_Pin_2);
+            break;
+        case SCR_GAME:
+            break;
+    }
 }
 
 void EXTI3_IRQHandler(void)
 {
     // Joystic LEFT
-    joystickMainScreen(EXTI_Line3, GPIOC, GPIO_Pin_3);
+    switch(stateScreen)
+    {
+        case SCR_MAIN:
+            joystickMainScreen(EXTI_Line3, GPIOC, GPIO_Pin_3);
+            break;
+        case SCR_PAGE:
+            joystickStageScreen(EXTI_Line3, GPIOC, GPIO_Pin_3);
+            break;
+        case SCR_GAME:
+            break;
+    }
 }
 
 void EXTI4_IRQHandler(void)
 {
     // Joystic RIGHT
-    joystickMainScreen(EXTI_Line4, GPIOC, GPIO_Pin_4);
+    switch(stateScreen)
+    {
+        case SCR_MAIN:
+            joystickMainScreen(EXTI_Line4, GPIOC, GPIO_Pin_4);
+            break;
+        case SCR_PAGE:
+            joystickStageScreen(EXTI_Line4, GPIOC, GPIO_Pin_4);
+            break;
+        case SCR_GAME:
+            break;
+    }
 }
 
 void EXTI9_5_IRQHandler(void)
 {
     // Joystic UP
-    joystickMainScreen(EXTI_Line5, GPIOC, GPIO_Pin_5);
+    switch(stateScreen)
+    {
+        case SCR_MAIN:
+            joystickMainScreen(EXTI_Line5, GPIOC, GPIO_Pin_5);
+            break;
+        case SCR_PAGE:
+            joystickStageScreen(EXTI_Line5, GPIOC, GPIO_Pin_5);
+            break;
+        case SCR_GAME:
+            break;
+    }
 }
 
 void EXTI15_10_IRQHandler(void)
 {
-
+    switch(stateScreen)
+    {
+        case SCR_MAIN:
+            selectMainScreen(EXTI_Line11, GPIOD, GPIO_Pin_11);
+            break;
+        case SCR_PAGE:
+            break;
+        case SCR_GAME:
+            break;
+}
 }

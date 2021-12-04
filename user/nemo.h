@@ -24,6 +24,10 @@
 #define TEXT_SIZE 20
 #define PADDING_SIZE 20
 
+
+// stateScreen
+enum { SCR_MAIN = 0, SCR_PAGE, SCR_GAME };
+
 // config.c
 void configure();
 
@@ -36,7 +40,8 @@ void EXTI15_10_IRQHandler(void);
 
 // mainScreen.c
 void joystickMainScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
-void startScreen(void);
+void selectMainScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+void mainScreen(void);
 
 // stageScreen.c
 void joystickStageScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
