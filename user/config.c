@@ -119,4 +119,5 @@ void configure()
     GPIO_Configure();
     EXTI_Configure();
     NVIC_Configure();
+    initBluetooth();
 }

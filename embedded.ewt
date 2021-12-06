@@ -3049,6 +3049,9 @@
             </file>
         </group>
         <file>
+            <name>$PROJ_DIR$\user\bluetooth.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\user\config.c</name>
         </file>
         <file>

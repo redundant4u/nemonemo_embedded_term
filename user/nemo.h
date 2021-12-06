@@ -53,3 +53,6 @@ void drawProblem(void);
 
 // gameScreen.c
 void gameScreen();
+
+// bluetooth.c
+void initBluetooth(void);
