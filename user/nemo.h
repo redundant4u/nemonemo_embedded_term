@@ -42,6 +42,7 @@ void EXTI15_10_IRQHandler(void);
 void joystickMainScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
 void selectMainScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
 void mainScreen(void);
+void gameScreen(void);
 
 // stageScreen.c
 void joystickStageScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);

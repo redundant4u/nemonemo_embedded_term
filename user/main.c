@@ -2,12 +2,15 @@
 
 int stateScreen = SCR_MAIN;
 
-void Delay(int n)
-{
-  time_t current = clock();
-  while (clock() - current < n)
-    ;
-}
+#define PROBLEM_MAX_X 10
+#define PROBLEM_MAX_Y 3
+
+// void Delay(int n)
+// {
+//   time_t current = clock();
+//   while (clock() - current < n)
+//     ;
+// }
 
 int main(void)
 {
@@ -16,7 +19,9 @@ int main(void)
   LCD_Init();
   LCD_Clear(WHITE);
 
-  mainScreen();
+  // mainScreen();
+
+  gameScreen();
 
   while (1)
   {
