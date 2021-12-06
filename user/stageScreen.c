@@ -1,6 +1,7 @@
 #include "nemo.h"
 
 int stageNumber = 0;
+extern int stateScreen;
 
 void joystickStageScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)
 {
@@ -10,6 +11,8 @@ void joystickStageScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_
         {
             switch (GPIO_Pin)
             {
+                // TODO :: dsdfsdfsd
+                // NOTE : dsfsdff
             case GPIO_Pin_4:
                 //Right
                 stageNumber++;
@@ -32,6 +35,31 @@ void joystickStageScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_
             if (stageNumber < 0)
                 stageNumber += STAGE_MAX;
             stageScreen();
+        }
+        EXTI_ClearITPendingBit(EXTI_Line);
+    }
+}
+
+void selectStageScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)
+{
+    if (EXTI_GetITStatus(EXTI_Line) != RESET)
+    {
+        if (GPIO_ReadInputDataBit(GPIOx, GPIO_Pin) == Bit_RESET)
+        {
+            switch (stageNumber)
+            {
+            case 0:
+              gameScreen();
+              stateScreen = SCR_GAME;
+              break;
+              /*
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            */
+            }
         }
         EXTI_ClearITPendingBit(EXTI_Line);
     }
