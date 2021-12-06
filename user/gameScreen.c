@@ -1,7 +1,7 @@
 #include "nemo.h"
 
 #define BOARD_END_X 210
-#define BOARD_END_Y 280
+#define BOARD_END_Y 270
 
 #define BOARD_UNIT 16
 #define BOARD_ROW_SIZE 10

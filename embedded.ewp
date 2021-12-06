@@ -2305,6 +2305,9 @@
             <name>$PROJ_DIR$\user\config.c</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\user\gameScreen.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\user\handler.c</name>
         </file>
         <file>

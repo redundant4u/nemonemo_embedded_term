@@ -47,6 +47,9 @@ void gameScreen(void);
 // stageScreen.c
 void joystickStageScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
 void stageScreen(void);
+void selectBlock(int xPast, int yPast);
+void drawBoard(void);
+void drawProblem(void);
 
 // gameScreen.c
 void gameScreen();
