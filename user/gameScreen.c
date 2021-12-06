@@ -12,13 +12,71 @@
 #define PROBLEM_UP_PADDING 5
 #define PROBLEM_LEFT_PADDING 40
 
+extern int stateScreen;
+
 int START_X = BOARD_END_X - BOARD_UNIT * BOARD_ROW_SIZE;
 int START_Y = BOARD_END_Y - BOARD_UNIT * BOARD_ROW_SIZE;
 
+int current_xPoint = 1;
+int current_yPoint = 1;
+
 void gameScreen(void)
 {
+    LCD_Clear(WHITE);
+    selectBlock(current_xPoint, current_yPoint);
+    stateScreen = SCR_GAME;
+
     drawBoard();
     drawProblem();
+}
+
+void joystickGameScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)
+{
+    if (EXTI_GetITStatus(EXTI_Line) != RESET)
+    {
+        if (GPIO_ReadInputDataBit(GPIOx, GPIO_Pin) == Bit_RESET)
+        {
+            int xPast = current_xPoint;
+            int yPast = current_yPoint;
+            switch (GPIO_Pin)
+            {
+            case GPIO_Pin_4:
+                //Right
+                current_xPoint++;
+                break;
+            case GPIO_Pin_3:
+                //Left
+                current_xPoint--;
+                break;
+            case GPIO_Pin_5:
+                //Up
+                current_yPoint --;
+                break;
+            case GPIO_Pin_2:
+                //Down
+                current_yPoint ++;
+                break;
+            }
+            if (current_xPoint > BOARD_ROW_SIZE)
+                current_xPoint =1;
+            if (current_xPoint < 1)
+                current_xPoint = BOARD_ROW_SIZE;
+            if (current_yPoint > BOARD_ROW_SIZE)
+                current_yPoint =1;
+            if (current_yPoint < 1)
+                current_yPoint = BOARD_ROW_SIZE;
+            selectBlock(xPast, yPast);
+        }
+        EXTI_ClearITPendingBit(EXTI_Line);
+    }
+}
+
+void selectBlock(int xPast, int yPast)
+{
+  LCD_Fill(START_X + (xPast-1)*BOARD_UNIT, START_Y + (yPast-1)*BOARD_UNIT, START_X + (xPast)*BOARD_UNIT, START_Y + (yPast)*BOARD_UNIT, WHITE);
+  LCD_Fill(START_X + (current_xPoint-1)*BOARD_UNIT, START_Y + (current_yPoint-1)*BOARD_UNIT, START_X + (current_xPoint)*BOARD_UNIT, START_Y + (current_yPoint)*BOARD_UNIT, RED);
+  LCD_DrawRectangle(START_X + (xPast-1)*BOARD_UNIT, START_Y + (yPast-1)*BOARD_UNIT, START_X + (xPast)*BOARD_UNIT, START_Y + (yPast)*BOARD_UNIT);
+  LCD_DrawRectangle(START_X + (current_xPoint-1)*BOARD_UNIT, START_Y + (current_yPoint-1)*BOARD_UNIT, START_X + (current_xPoint)*BOARD_UNIT, START_Y + (current_yPoint)*BOARD_UNIT);
 }
 
 void drawBoard(void)
