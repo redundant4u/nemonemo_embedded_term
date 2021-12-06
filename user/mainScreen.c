@@ -1,6 +1,16 @@
 #include "nemo.h"
 
-int menuNumber = 0;
+// NOTE: Define Position
+#define MENU_COUNT 3
+enum
+{
+    MENU_START,
+    MENU_BGM,
+    MENU_BLUETOOTH
+};
+
+int menuNumber = MENU_START;
+extern int stateScreen;
 
 void joystickMainScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)
 {
@@ -8,19 +18,49 @@ void joystickMainScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_P
     {
         if (GPIO_ReadInputDataBit(GPIOx, GPIO_Pin) == Bit_RESET)
         {
-            menuNumber = (menuNumber + 1) % 2;
-            startScreen();
+            switch (GPIO_Pin)
+            {
+            // TODO : define PIN_UP <- GPIO_Pin_5
+            case GPIO_Pin_5: // Up
+                menuNumber--;
+                break;
+            case GPIO_Pin_2: // Down
+                menuNumber++;
+                break;
+            }
+            menuNumber = (menuNumber + MENU_COUNT) % MENU_COUNT;
+            mainScreen();
         }
         EXTI_ClearITPendingBit(EXTI_Line);
     }
 }
 
-void startScreen(void)
+void selectMainScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)
 {
-    char *MENU_TEXT[2] = {"Game Start", "BGM On/Off"};
+    if (EXTI_GetITStatus(EXTI_Line) != RESET)
+    {
+        if (GPIO_ReadInputDataBit(GPIOx, GPIO_Pin) == Bit_RESET)
+        {
+            switch (menuNumber)
+            {
+            case MENU_START:
+                stageScreen();
+                stateScreen = SCR_PAGE;
+                break;
+            case MENU_BGM:
+                break;
+            }
+        }
+        EXTI_ClearITPendingBit(EXTI_Line);
+    }
+}
+
+void mainScreen(void)
+{
+    char *MENU_TEXT[MENU_COUNT] = {"Game Start", "BGM On/Off", "Bluetooth"};
     LCD_Clear(WHITE);
 
-    for (int i = 0; i < 2; i++)
+    for (int i = 0; i < MENU_COUNT; i++)
     {
         LCD_ShowString(START_TEXT_X, START_TEXT_Y + TEXT_SIZE * i, MENU_TEXT[i], BLACK, WHITE);
     }

@@ -16,3 +16,6 @@ settings/*.dnx
 
 # 
 *.dep
+
+#.vscode
+.vscode/
