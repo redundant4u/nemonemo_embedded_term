@@ -1,14 +1,15 @@
 #include "stm32f10x.h"
-#include "core_cm3.h"
-#include "misc.h"
 #include "stm32f10x_gpio.h"
 #include "stm32f10x_rcc.h"
+#include "stm32f10x_exti.h"
 #include "stm32f10x_usart.h"
 #include "stm32f10x_adc.h"
 #include "stm32f10x_dma.h"
+#include "stm32f10x_tim.h"
+#include "core_cm3.h"
+#include "misc.h"
 #include "lcd.h"
 #include "touch.h"
-#include <time.h>
 
 #define START_TEXT_X 70
 #define START_TEXT_Y 100
@@ -53,3 +54,6 @@ void drawProblem(void);
 
 // gameScreen.c
 void gameScreen();
+
+// util.c
+void delay(int ms);

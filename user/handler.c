@@ -83,5 +83,24 @@ void EXTI15_10_IRQHandler(void)
         case SCR_GAME:
             
             break;
+    }
 }
+
+extern uint32_t Music;
+extern uint32_t Sound;
+
+// beeper handler
+void TIM2_IRQHandler(void)
+{
+    if(TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
+    {
+        TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
+        Sound++;
+
+        if(Music <= Sound)
+        {
+            GPIOB->ODR ^= GPIO_Pin_0;
+            Sound = 0;
+        }
+    }
 }
