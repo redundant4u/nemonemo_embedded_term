@@ -20,7 +20,6 @@ void joystickMainScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_P
         {
             switch (GPIO_Pin)
             {
-            // TODO : define PIN_UP <- GPIO_Pin_5
             case GPIO_Pin_5: // Up
                 menuNumber--;
                 break;
@@ -48,6 +47,8 @@ void selectMainScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin
                 stateScreen = SCR_PAGE;
                 break;
             case MENU_BGM:
+                bgmScreen();
+                stateScreen = SCR_BGM;
                 break;
             }
         }
@@ -64,6 +65,5 @@ void mainScreen(void)
     {
         LCD_ShowString(START_TEXT_X, START_TEXT_Y + TEXT_SIZE * i, MENU_TEXT[i], BLACK, WHITE);
     }
-    // draw arrow
     LCD_ShowString(START_SELECTOR_X, START_SELECTOR_Y + TEXT_SIZE * menuNumber, ">>", BLACK, WHITE);
 }

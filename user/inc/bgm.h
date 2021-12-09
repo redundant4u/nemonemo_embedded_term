@@ -12,3 +12,14 @@
 #define RA_SHARP  107
 #define SI        101
 #define HIGH_DO   961
+
+#define BGM_COUNT 1
+
+enum
+{
+    SUPER_MARIO_UNDERGROUND,
+};
+
+void bgmStart(int number);
+
+int* undergroundBGM(void);
