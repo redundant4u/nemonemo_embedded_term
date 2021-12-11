@@ -114,12 +114,31 @@ void USART2_IRQHandler(void)
     USART_ClearITPendingBit(USART2, USART_IT_RXNE);
 }
 
+void sendDataUART2(uint16_t data) {
+	/* Wait till TC is set */
+	while ((USART1->SR & USART_SR_TC) == 0);
+	USART_SendData(USART1, data);
+}
+
+void BluetoothSendString(char *string, int length)
+{
+    for (int i = 0; i < length - 1; i++)
+    {
+        while (USART_GetFlagStatus(USART2, USART_FLAG_TXE) == RESET);
+        uint16_t data = string[i];
+        USART_SendData(USART2, data);
+    }
+}
+
 void bluetoothSetting(void)
 {
-    // send config 
-    // AT+BTNAME=NemoLogic
-    // AT+BTKEY=1234
-    // AT+BTSCAN
+    // Set Bluetooth Config
+    char msgSetName[] = "AT+BTNAME=NemoLogic\r";
+    char msgSetKey[] = "AT+BTKEY=1234\r";
+    char msgScan[] = "AT+BTSCAN\r";
+    // BluetoothSendString(msgSetName, sizeof(msgSetName));
+    // BluetoothSendString(msgSetKey, sizeof(msgSetKey));
+    BluetoothSendString(msgScan, sizeof(msgScan));
 }
 
 void initBluetooth(void)

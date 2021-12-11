@@ -56,3 +56,4 @@ void gameScreen();
 
 // bluetooth.c
 void initBluetooth(void);
+void BluetoothSendString(char *string, int length);

@@ -22,6 +22,8 @@ int current_yPoint = 1;
 
 void gameScreen(void)
 {
+    char msgGameStart[] = "GAME START";
+    BluetoothSendString(msgGameStart, sizeof(msgGameStart));
     LCD_Clear(WHITE);
     selectBlock(current_xPoint, current_yPoint);
     stateScreen = SCR_GAME;
