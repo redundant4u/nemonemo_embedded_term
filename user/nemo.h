@@ -24,9 +24,13 @@
 #define TEXT_SIZE 20
 #define PADDING_SIZE 20
 
-
 // stateScreen
-enum { SCR_MAIN = 0, SCR_PAGE, SCR_GAME };
+enum
+{
+    SCR_MAIN = 0,
+    SCR_PAGE,
+    SCR_GAME
+};
 
 // config.c
 void configure();
