@@ -18,26 +18,26 @@ void GPIO_ConfigureBluetooth(void)
     GPIO_InitTypeDef GPIO_InitStructure;
 
     /* UART1 pin setting */
-    //TX
+    // TX
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
     GPIO_Init(GPIOA, &GPIO_InitStructure);
 
-    //RX
+    // RX
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD;
     GPIO_Init(GPIOA, &GPIO_InitStructure);
 
     /* UART2 pin setting */
-    //TX
+    // TX
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
     GPIO_Init(GPIOA, &GPIO_InitStructure);
 
-    //RX
+    // RX
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD;
@@ -97,7 +97,8 @@ void NVIC_ConfigureBluetooth(void)
 void USART1_IRQHandler(void)
 {
     uint16_t data;
-    while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
+    while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET)
+        ;
 
     data = (unsigned char)USART_ReceiveData(USART1);
     USART_SendData(USART2, data);
@@ -107,24 +108,28 @@ void USART1_IRQHandler(void)
 void USART2_IRQHandler(void)
 {
     uint16_t data;
-    while (USART_GetFlagStatus(USART2, USART_FLAG_TXE) == RESET);
+    while (USART_GetFlagStatus(USART2, USART_FLAG_TXE) == RESET)
+        ;
 
     data = (unsigned char)USART_ReceiveData(USART2);
     USART_SendData(USART1, data);
     USART_ClearITPendingBit(USART2, USART_IT_RXNE);
 }
 
-void sendDataUART2(uint16_t data) {
-	/* Wait till TC is set */
-	while ((USART1->SR & USART_SR_TC) == 0);
-	USART_SendData(USART1, data);
+void sendDataUART2(uint16_t data)
+{
+    /* Wait till TC is set */
+    while ((USART1->SR & USART_SR_TC) == 0)
+        ;
+    USART_SendData(USART1, data);
 }
 
 void BluetoothSendString(char *string, int length)
 {
     for (int i = 0; i < length - 1; i++)
     {
-        while (USART_GetFlagStatus(USART2, USART_FLAG_TXE) == RESET);
+        while (USART_GetFlagStatus(USART2, USART_FLAG_TXE) == RESET)
+            ;
         uint16_t data = string[i];
         USART_SendData(USART2, data);
     }
