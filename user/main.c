@@ -10,6 +10,7 @@ int main(void)
   LCD_Clear(WHITE);
 
   mainScreen();
+  bgmStart(0);
 
   while (1)
   {

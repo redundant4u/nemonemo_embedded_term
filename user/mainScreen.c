@@ -1,7 +1,7 @@
 #include "nemo.h"
 
 // NOTE: Define Position
-#define MENU_COUNT 3
+#define MENU_COUNT 2
 enum
 {
     MENU_START,
@@ -58,7 +58,7 @@ void selectMainScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin
 
 void mainScreen(void)
 {
-    char *MENU_TEXT[MENU_COUNT] = {"Game Start", "BGM On/Off", "Bluetooth"};
+    char *MENU_TEXT[MENU_COUNT] = {"Game Start", "Bluetooth"};
     LCD_Clear(WHITE);
 
     for (int i = 0; i < MENU_COUNT; i++)

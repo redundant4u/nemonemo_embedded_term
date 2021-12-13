@@ -10,36 +10,42 @@ void bgmStart(int number)
     switch (number)
     {
     case SUPER_MARIO_UNDERGROUND:
-        int notes[][2] = undergroundBGM();
+    {
+        int *notes = undergroundBGM();
         while(1)
         {
-            for (int i = 0; i < sizeof(notes) / sizeof(notes[0]); i++)
+            for (int i = 0; i < 51; i++)
             {
-                Music = notes[i][0];
-                delay(notes[i][1]);
+                Music = notes[i];
 
-                if(notes[i][0] != REST)
+                if(notes[i] != REST)
                 {
+                    for(int j = 0; i < 700000; j++) {}
                     Music = REST;
+                } else {
+                    for(int j = 0; j < 300000; j++) {}
+                    Music = REST;
+                    for(int j = 0; j < 300000; j++) {}
                 }
             }
         }
-        break;
+        // break;
+    }
     }
 }
 
 int* undergroundBGM(void)
 {
-    int notes[][2] = {
-        { SOL, 500 }, { SOL, 500 }, { MI, 500 }, { MI, 500 }, { PA, 500 }, { PA, 500 }, { REST, 5000 },
-        { SOL, 500 }, { SOL, 500 }, { MI, 500 }, { MI, 500 }, { PA, 500 }, { PA, 500 }, { REST, 5000 },
-        { DO, 500 }, { DO, 500 }, { PA, 500 }, { PA, 500 }, { RA_SHARP, 500 }, { RA_SHARP, 500 }, { REST, 5000 },
-        { DO, 500 }, { DO, 500 }, { PA, 500 }, { PA, 500 }, { RA_SHARP, 500 }, { RA_SHARP, 500 }, { REST, 5000 },
-        { RA_SHARP, 400 }, { RA, 500 }, { SOL_SHARP, 500 }, { SOL, 500 },
-        { RA_SHARP, 2000 }, { RA, 2000 }, { RE_SHARP, 2000 }, { RE, 2000 }, { SOL_SHARP, 2000 },
-        { SOL, 500 }, { DO, 500 }, { SI, 500 }, { RA_SHARP, 500 }, { PA, 500 }, { MI, 500 }, { RE_SHARP, 500 }, { REST, 5000 },
-        { RA_SHARP, 5000 }, { PA_SHARP, 5000 }, { PA, 500 }, { MI, 500, 500 }, { RE_SHARP, 500 }, { REST, 5000 }
+    static int notes[] = {
+        SOL, SOL, MI, MI, PA, PA, REST,
+        SOL, SOL, MI, MI, PA, PA, REST,
+        DO, DO, PA, PA, RA_SHARP, RA_SHARP, REST,
+        DO, DO, PA, PA, RA_SHARP, RA_SHARP, REST,
+        RA_SHARP, RA, SOL_SHARP, SOL,
+        RA_SHARP, RA, RE_SHARP, RE, SOL_SHARP,
+        SOL, DO, SI, RA_SHARP, PA, MI, RE_SHARP, REST,
+        RA_SHARP, PA_SHARP, PA, MI, RE_SHARP, REST
     };
 
-    return (int*) notes;
+    return notes;
 }
