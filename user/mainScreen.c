@@ -46,10 +46,6 @@ void selectMainScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin
                 stageScreen();
                 stateScreen = SCR_PAGE;
                 break;
-            case MENU_BGM:
-                bgmScreen();
-                stateScreen = SCR_BGM;
-                break;
             }
         }
         EXTI_ClearITPendingBit(EXTI_Line);

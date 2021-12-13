@@ -52,14 +52,10 @@ void selectBlock(int xPast, int yPast);
 void drawBoard(void);
 void drawProblem(void);
 
-// bgmScreen.c
-void joystickBGMScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
-void selectBGMScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
-void bgmScreen(void);
-
 // gameScreen.c
-void gameScreen();
+void joystickGameScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+void selectGameScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+void gameScreen(void);
 
-// util.c
 void delay(int ms);
 void backScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
