@@ -78,10 +78,10 @@ void EXTI15_10_IRQHandler(void)
             selectMainScreen(EXTI_Line11, GPIOD, GPIO_Pin_11);
             break;
         case SCR_PAGE:
-          selectStageScreen(EXTI_Line11, GPIOD, GPIO_Pin_11);
+            selectStageScreen(EXTI_Line11, GPIOD, GPIO_Pin_11);
             break;
         case SCR_GAME:
-            
+            selectColorBlock(EXTI_Line11, GPIOD, GPIO_Pin_11);
             break;
 }
 }
