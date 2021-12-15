@@ -47,6 +47,7 @@ void gameScreen(void);
 
 // stageScreen.c
 void joystickStageScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+void selectStageScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
 void stageScreen(void);
 void selectBlock(int xPast, int yPast);
 void drawBoard(void);
@@ -57,5 +58,8 @@ void joystickGameScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_P
 void selectGameScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
 void gameScreen(void);
 
-void delay(int ms);
+// bgm.c
+void bgmStart(void);
+
+// util.c
 void backScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);

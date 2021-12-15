@@ -1,14 +1,6 @@
 #include "nemo.h"
 
-#include <time.h>
-
 extern int stateScreen;
-
-void Delay(int ms)
-{
-  time_t current = clock();
-  while (clock() - current < ms);
-}
 
 void backScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)
 {

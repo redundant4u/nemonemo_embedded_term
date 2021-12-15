@@ -3,6 +3,7 @@
 void RCC_Configure(void)
 {
     // buzzer PB0
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
 
     // S1 Button PD11
