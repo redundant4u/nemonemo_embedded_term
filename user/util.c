@@ -18,10 +18,14 @@ void backScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)
             case SCR_MAIN:
                 break;
             case SCR_PAGE:
-                mainScreen(SCREEN_CLEAR);
+                stageScreen(SCREEN_CLEAR);
+                mainScreen(SCREEN_DISPLAY);
+                stateScreen--;
                 break;
             case SCR_GAME:
-                stageScreen(SCREEN_CLEAR);
+                // gameScreen(SCREEN_CLEAR);
+                stageScreen(SCREEN_DISPLAY);
+                stateScreen--;
                 break;
             }
         }

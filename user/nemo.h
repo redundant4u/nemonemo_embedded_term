@@ -30,13 +30,6 @@ enum { SCR_MAIN = 0, SCR_PAGE, SCR_GAME, SCR_BGM };
 // config.c
 void configure();
 
-// handler.c
-void EXTI2_IRQHandler(void);
-void EXTI3_IRQHandler(void);
-void EXTI4_IRQHandler(void);
-void EXTI9_5_IRQHandler(void);
-void EXTI15_10_IRQHandler(void);
-
 // mainScreen.c
 void joystickMainScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
 void selectMainScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
@@ -57,6 +50,7 @@ void drawProblem(void);
 void joystickGameScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
 void selectGameScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
 void gameScreen(void);
+void selectColorBlock(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
 
 // bgm.c
 void bgmStart(void);

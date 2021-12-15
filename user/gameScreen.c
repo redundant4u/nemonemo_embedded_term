@@ -233,7 +233,7 @@ int checkCorrect()
     return TRUE;
 }
 
-void setBlockColor()
+void setBlockColor(void)
 {
     if (boardState[current_xPoint - 1][current_yPoint - 1])
     {
@@ -258,6 +258,8 @@ void selectColorBlock(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin
         if (GPIO_ReadInputDataBit(GPIOx, GPIO_Pin) == Bit_RESET)
         {
             setBlockColor();
+            screenDelay();
+                
             if (checkCorrect())
             {
                 LCD_Clear(WHITE);
