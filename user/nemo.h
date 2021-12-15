@@ -11,19 +11,17 @@
 #include "lcd.h"
 #include "touch.h"
 
-#define START_TEXT_X 70
-#define START_TEXT_Y 100
-
-#define START_SELECTOR_X 40
-#define START_SELECTOR_Y 100
-
-#define STAGE_PAGE1_X 100
-#define STAGE_PAGE1_Y 70
+#define UP      (uint16_t) 0x0020
+#define LEFT    (uint16_t) 0x0008
+#define DOWN    (uint16_t) 0x0004
+#define RIGHT   (uint16_t) 0x0010
 
 #define STAGE_MAX 6
 
-#define TEXT_SIZE 20
-#define PADDING_SIZE 20
+#define MAINSCREEN_TEXT_SIZE        20
+
+#define SCREEN_DISPLAY  0
+#define SCREEN_CLEAR    1
 
 
 // stateScreen
@@ -42,13 +40,15 @@ void EXTI15_10_IRQHandler(void);
 // mainScreen.c
 void joystickMainScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
 void selectMainScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
-void mainScreen(void);
-void gameScreen(void);
+void clearMainScreenArrow(int clearNumber);
+void drawMainScreenArrow(void);
+void mainScreen(int mode);
 
 // stageScreen.c
 void joystickStageScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
 void selectStageScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
-void stageScreen(void);
+void clearStageScreen(void);
+void stageScreen(int mode);
 void selectBlock(int xPast, int yPast);
 void drawBoard(void);
 void drawProblem(void);
@@ -62,4 +62,5 @@ void gameScreen(void);
 void bgmStart(void);
 
 // util.c
+void screenDelay(void);
 void backScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);

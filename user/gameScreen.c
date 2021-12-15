@@ -3,17 +3,17 @@
 #define BOARD_END_X 210
 #define BOARD_END_Y 270
 
-#define BOARD_UNIT 16
-#define BOARD_ROW_SIZE 10
+#define BOARD_UNIT      16
+#define BOARD_ROW_SIZE  10
 
-#define PROBLEM_MAX_X 10
-#define PROBLEM_MAX_Y 3
+#define PROBLEM_MAX_X   10
+#define PROBLEM_MAX_Y   3
 
-#define PROBLEM_UP_PADDING 5
-#define PROBLEM_LEFT_PADDING 40
+#define PROBLEM_UP_PADDING      5
+#define PROBLEM_LEFT_PADDING    40
 
-#define TRUE 1
-#define FALSE 0
+#define TRUE    1
+#define FALSE   0
 
 extern int stateScreen;
 extern int stageNumber;
@@ -70,25 +70,23 @@ void joystickGameScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_P
         {
             int xPast = current_xPoint;
             int yPast = current_yPoint;
+
             switch (GPIO_Pin)
             {
-            case GPIO_Pin_4:
-                //Right
+            case RIGHT:
                 current_xPoint++;
                 break;
-            case GPIO_Pin_3:
-                //Left
+            case LEFT:
                 current_xPoint--;
                 break;
-            case GPIO_Pin_5:
-                //Up
+            case UP:
                 current_yPoint--;
                 break;
-            case GPIO_Pin_2:
-                //Down
+            case DOWN:
                 current_yPoint++;
                 break;
             }
+
             if (current_xPoint > BOARD_ROW_SIZE)
                 current_xPoint = 1;
             if (current_xPoint < 1)
@@ -97,6 +95,7 @@ void joystickGameScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_P
                 current_yPoint = 1;
             if (current_yPoint < 1)
                 current_yPoint = BOARD_ROW_SIZE;
+
             selectBlock(xPast, yPast);
         }
         EXTI_ClearITPendingBit(EXTI_Line);
@@ -106,13 +105,45 @@ void joystickGameScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_P
 void selectBlock(int xPast, int yPast)
 {
     if (boardState[xPast - 1][yPast - 1])
-        LCD_Fill(START_X + (xPast - 1) * BOARD_UNIT, START_Y + (yPast - 1) * BOARD_UNIT, START_X + (xPast)*BOARD_UNIT, START_Y + (yPast)*BOARD_UNIT, BLACK);
+    {
+        LCD_Fill(
+            START_X + (xPast - 1) * BOARD_UNIT,
+            START_Y + (yPast - 1) * BOARD_UNIT,
+            START_X + (xPast)*BOARD_UNIT,
+            START_Y + (yPast)*BOARD_UNIT,
+            BLACK
+        );
+    }
     else
-        LCD_Fill(START_X + (xPast - 1) * BOARD_UNIT, START_Y + (yPast - 1) * BOARD_UNIT, START_X + (xPast)*BOARD_UNIT, START_Y + (yPast)*BOARD_UNIT, WHITE);
+    {
+        LCD_Fill(
+            START_X + (xPast - 1) * BOARD_UNIT,
+            START_Y + (yPast - 1) * BOARD_UNIT,
+            START_X + (xPast)*BOARD_UNIT,
+            START_Y + (yPast)*BOARD_UNIT,
+            WHITE
+        );
+    }
 
-    LCD_Fill(START_X + (current_xPoint - 1) * BOARD_UNIT, START_Y + (current_yPoint - 1) * BOARD_UNIT, START_X + (current_xPoint)*BOARD_UNIT, START_Y + (current_yPoint)*BOARD_UNIT, RED);
-    LCD_DrawRectangle(START_X + (xPast - 1) * BOARD_UNIT, START_Y + (yPast - 1) * BOARD_UNIT, START_X + (xPast)*BOARD_UNIT, START_Y + (yPast)*BOARD_UNIT);
-    LCD_DrawRectangle(START_X + (current_xPoint - 1) * BOARD_UNIT, START_Y + (current_yPoint - 1) * BOARD_UNIT, START_X + (current_xPoint)*BOARD_UNIT, START_Y + (current_yPoint)*BOARD_UNIT);
+    LCD_Fill(
+        START_X + (current_xPoint - 1) * BOARD_UNIT,
+        START_Y + (current_yPoint - 1) * BOARD_UNIT,
+        START_X + (current_xPoint)*BOARD_UNIT,
+        START_Y + (current_yPoint)*BOARD_UNIT,
+        RED
+    );
+    LCD_DrawRectangle(
+        START_X + (xPast - 1) * BOARD_UNIT,
+        START_Y + (yPast - 1) * BOARD_UNIT,
+        START_X + (xPast)*BOARD_UNIT,
+        START_Y + (yPast)*BOARD_UNIT
+    );
+    LCD_DrawRectangle(
+        START_X + (current_xPoint - 1) * BOARD_UNIT,
+        START_Y + (current_yPoint - 1) * BOARD_UNIT,
+        START_X + (current_xPoint)*BOARD_UNIT,
+        START_Y + (current_yPoint)*BOARD_UNIT
+    );
 }
 
 void drawBoard(void)
@@ -151,17 +182,21 @@ void drawProblem(void)
         {0, 0, 7},
         {3, 2, 1},
         {0, 5, 2},
-        {0, 3, 3}};
+        {0, 3, 3}
+    };
 
     for (int x = 0; x < PROBLEM_MAX_X; x++)
     {
         for (int y = 0; y < PROBLEM_MAX_Y; y++)
         {
             if (problem_up[x][y] != 0)
+            {
                 LCD_ShowNum(
                     START_X + PROBLEM_UP_PADDING + (BOARD_UNIT * x),
                     START_Y - (BOARD_UNIT * 3) + (BOARD_UNIT * y),
-                    problem_up[x][y], 1, BLACK, WHITE);
+                    problem_up[x][y], 1, BLACK, WHITE
+                );
+            }
         }
     }
 
@@ -171,16 +206,19 @@ void drawProblem(void)
         for (int y = 0; y < PROBLEM_MAX_Y; y++)
         {
             if (problem_left[x][y] != 0)
-                LCD_ShowNum(START_X - PROBLEM_LEFT_PADDING + (BOARD_UNIT * y),
-                            START_Y + (BOARD_UNIT * x),
-                            problem_left[x][y], 1, BLACK, WHITE);
+            {
+                LCD_ShowNum(
+                    START_X - PROBLEM_LEFT_PADDING + (BOARD_UNIT * y),
+                    START_Y + (BOARD_UNIT * x),
+                    problem_left[x][y], 1, BLACK, WHITE
+                );
+            }
         }
     }
 }
 
 int checkCorrect()
 {
-
     for (int i = 0; i < BOARD_ROW_SIZE; i++)
     {
         for (int j = 0; j < BOARD_ROW_SIZE; j++)
