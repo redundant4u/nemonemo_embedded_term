@@ -3049,6 +3049,12 @@
             </file>
         </group>
         <file>
+            <name>$PROJ_DIR$\user\bgm.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\user\bgm.h</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\user\config.c</name>
         </file>
         <file>
@@ -3071,6 +3077,12 @@
         </file>
         <file>
             <name>$PROJ_DIR$\user\stm32f10x_it.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\user\util.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\user\util.h</name>
         </file>
     </group>
 </project>

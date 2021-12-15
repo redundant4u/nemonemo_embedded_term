@@ -1,7 +1,7 @@
 #include "nemo.h"
 
 // NOTE: Define Position
-#define MENU_COUNT 3
+#define MENU_COUNT 2
 enum
 {
     MENU_START,
@@ -20,7 +20,6 @@ void joystickMainScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_P
         {
             switch (GPIO_Pin)
             {
-            // TODO : define PIN_UP <- GPIO_Pin_5
             case GPIO_Pin_5: // Up
                 menuNumber--;
                 break;
@@ -47,8 +46,6 @@ void selectMainScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin
                 stageScreen();
                 stateScreen = SCR_PAGE;
                 break;
-            case MENU_BGM:
-                break;
             }
         }
         EXTI_ClearITPendingBit(EXTI_Line);
@@ -57,13 +54,12 @@ void selectMainScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin
 
 void mainScreen(void)
 {
-    char *MENU_TEXT[MENU_COUNT] = {"Game Start", "BGM On/Off", "Bluetooth"};
+    char *MENU_TEXT[MENU_COUNT] = {"Game Start", "Bluetooth"};
     LCD_Clear(WHITE);
 
     for (int i = 0; i < MENU_COUNT; i++)
     {
         LCD_ShowString(START_TEXT_X, START_TEXT_Y + TEXT_SIZE * i, MENU_TEXT[i], BLACK, WHITE);
     }
-    // draw arrow
     LCD_ShowString(START_SELECTOR_X, START_SELECTOR_Y + TEXT_SIZE * menuNumber, ">>", BLACK, WHITE);
 }

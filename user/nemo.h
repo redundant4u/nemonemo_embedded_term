@@ -1,14 +1,15 @@
 #include "stm32f10x.h"
-#include "core_cm3.h"
-#include "misc.h"
 #include "stm32f10x_gpio.h"
 #include "stm32f10x_rcc.h"
+#include "stm32f10x_exti.h"
 #include "stm32f10x_usart.h"
 #include "stm32f10x_adc.h"
 #include "stm32f10x_dma.h"
+#include "stm32f10x_tim.h"
+#include "core_cm3.h"
+#include "misc.h"
 #include "lcd.h"
 #include "touch.h"
-#include <time.h>
 
 #define START_TEXT_X 70
 #define START_TEXT_Y 100
@@ -26,7 +27,7 @@
 
 
 // stateScreen
-enum { SCR_MAIN = 0, SCR_PAGE, SCR_GAME };
+enum { SCR_MAIN = 0, SCR_PAGE, SCR_GAME, SCR_BGM };
 
 // config.c
 void configure();
@@ -46,10 +47,19 @@ void gameScreen(void);
 
 // stageScreen.c
 void joystickStageScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+void selectStageScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
 void stageScreen(void);
 void selectBlock(int xPast, int yPast);
 void drawBoard(void);
 void drawProblem(void);
 
 // gameScreen.c
-void gameScreen();
+void joystickGameScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+void selectGameScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+void gameScreen(void);
+
+// bgm.c
+void bgmStart(void);
+
+// util.c
+void backScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);

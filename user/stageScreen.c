@@ -11,8 +11,6 @@ void joystickStageScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_
         {
             switch (GPIO_Pin)
             {
-                // TODO :: dsdfsdfsd
-                // NOTE : dsfsdff
             case GPIO_Pin_4:
                 //Right
                 stageNumber++;
@@ -49,10 +47,10 @@ void selectStageScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pi
             switch (stageNumber)
             {
             case 0:
-              gameScreen();
-              stateScreen = SCR_GAME;
-              break;
-              /*
+                gameScreen();
+                stateScreen = SCR_GAME;
+                break;
+                /*
             case 1:
             case 2:
             case 3:
