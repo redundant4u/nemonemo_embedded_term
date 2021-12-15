@@ -88,7 +88,7 @@
                 </option>
                 <option>
                     <name>OCLastSavedByProductVersion</name>
-                    <state>9.10.2.39304</state>
+                    <state>9.20.1.43525</state>
                 </option>
                 <option>
                     <name>UseFlashLoader</name>
@@ -1292,7 +1292,7 @@
             <name>XDS100_ID</name>
             <archiveVersion>2</archiveVersion>
             <data>
-                <version>8</version>
+                <version>9</version>
                 <wantNonLocal>1</wantNonLocal>
                 <debug>1</debug>
                 <option>
@@ -1464,6 +1464,10 @@
                 </option>
                 <option>
                     <name>OCXDSDigitalStatesConfigFile</name>
+                    <state>1</state>
+                </option>
+                <option>
+                    <name>OCSelectedCoreName</name>
                     <state>1</state>
                 </option>
             </data>
@@ -2818,7 +2822,7 @@
             <name>XDS100_ID</name>
             <archiveVersion>2</archiveVersion>
             <data>
-                <version>8</version>
+                <version>9</version>
                 <wantNonLocal>1</wantNonLocal>
                 <debug>0</debug>
                 <option>
@@ -2990,6 +2994,10 @@
                 </option>
                 <option>
                     <name>OCXDSDigitalStatesConfigFile</name>
+                    <state>1</state>
+                </option>
+                <option>
+                    <name>OCSelectedCoreName</name>
                     <state>1</state>
                 </option>
             </data>

@@ -12,13 +12,45 @@
 #define PROBLEM_UP_PADDING 5
 #define PROBLEM_LEFT_PADDING 40
 
+#define TRUE 1
+#define FALSE 0
+
 extern int stateScreen;
+extern int stageNumber;
 
 int START_X = BOARD_END_X - BOARD_UNIT * BOARD_ROW_SIZE;
 int START_Y = BOARD_END_Y - BOARD_UNIT * BOARD_ROW_SIZE;
 
 int current_xPoint = 1;
 int current_yPoint = 1;
+
+int boardState[BOARD_ROW_SIZE][BOARD_ROW_SIZE] = {
+    FALSE,
+};
+
+int correct1[BOARD_ROW_SIZE][BOARD_ROW_SIZE] = {
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+/*
+        {0, 0, 0, 1, 0, 0, 0, 1, 1, 1},
+        {0, 0, 1, 0, 0, 0, 0, 0, 1, 1},
+        {0,1,1,0,0,1,0,0,0,1},
+        {1,1,1,0,0,0,0,0,0,0},
+        {1,1,1,1,0,0,0,0,0,0},
+        {1,1,1,1,1,1,0,0,0,0},
+        {1,1,1,1,1,1,1,0,0,0},
+        {0,1,1,1,0,1,1,0,0,1},
+        {0,0,1,1,1,1,1,0,1,1},
+        {0,0,0,1,1,1,0,1,1,1}
+};*/
 
 void gameScreen(void)
 {
@@ -50,19 +82,19 @@ void joystickGameScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_P
                 break;
             case GPIO_Pin_5:
                 //Up
-                current_yPoint --;
+                current_yPoint--;
                 break;
             case GPIO_Pin_2:
                 //Down
-                current_yPoint ++;
+                current_yPoint++;
                 break;
             }
             if (current_xPoint > BOARD_ROW_SIZE)
-                current_xPoint =1;
+                current_xPoint = 1;
             if (current_xPoint < 1)
                 current_xPoint = BOARD_ROW_SIZE;
             if (current_yPoint > BOARD_ROW_SIZE)
-                current_yPoint =1;
+                current_yPoint = 1;
             if (current_yPoint < 1)
                 current_yPoint = BOARD_ROW_SIZE;
             selectBlock(xPast, yPast);
@@ -73,10 +105,14 @@ void joystickGameScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_P
 
 void selectBlock(int xPast, int yPast)
 {
-  LCD_Fill(START_X + (xPast-1)*BOARD_UNIT, START_Y + (yPast-1)*BOARD_UNIT, START_X + (xPast)*BOARD_UNIT, START_Y + (yPast)*BOARD_UNIT, WHITE);
-  LCD_Fill(START_X + (current_xPoint-1)*BOARD_UNIT, START_Y + (current_yPoint-1)*BOARD_UNIT, START_X + (current_xPoint)*BOARD_UNIT, START_Y + (current_yPoint)*BOARD_UNIT, RED);
-  LCD_DrawRectangle(START_X + (xPast-1)*BOARD_UNIT, START_Y + (yPast-1)*BOARD_UNIT, START_X + (xPast)*BOARD_UNIT, START_Y + (yPast)*BOARD_UNIT);
-  LCD_DrawRectangle(START_X + (current_xPoint-1)*BOARD_UNIT, START_Y + (current_yPoint-1)*BOARD_UNIT, START_X + (current_xPoint)*BOARD_UNIT, START_Y + (current_yPoint)*BOARD_UNIT);
+    if (boardState[xPast - 1][yPast - 1])
+        LCD_Fill(START_X + (xPast - 1) * BOARD_UNIT, START_Y + (yPast - 1) * BOARD_UNIT, START_X + (xPast)*BOARD_UNIT, START_Y + (yPast)*BOARD_UNIT, BLACK);
+    else
+        LCD_Fill(START_X + (xPast - 1) * BOARD_UNIT, START_Y + (yPast - 1) * BOARD_UNIT, START_X + (xPast)*BOARD_UNIT, START_Y + (yPast)*BOARD_UNIT, WHITE);
+
+    LCD_Fill(START_X + (current_xPoint - 1) * BOARD_UNIT, START_Y + (current_yPoint - 1) * BOARD_UNIT, START_X + (current_xPoint)*BOARD_UNIT, START_Y + (current_yPoint)*BOARD_UNIT, RED);
+    LCD_DrawRectangle(START_X + (xPast - 1) * BOARD_UNIT, START_Y + (yPast - 1) * BOARD_UNIT, START_X + (xPast)*BOARD_UNIT, START_Y + (yPast)*BOARD_UNIT);
+    LCD_DrawRectangle(START_X + (current_xPoint - 1) * BOARD_UNIT, START_Y + (current_yPoint - 1) * BOARD_UNIT, START_X + (current_xPoint)*BOARD_UNIT, START_Y + (current_yPoint)*BOARD_UNIT);
 }
 
 void drawBoard(void)
@@ -115,8 +151,7 @@ void drawProblem(void)
         {0, 0, 7},
         {3, 2, 1},
         {0, 5, 2},
-        {0, 3, 3}
-    };
+        {0, 3, 3}};
 
     for (int x = 0; x < PROBLEM_MAX_X; x++)
     {
@@ -126,8 +161,7 @@ void drawProblem(void)
                 LCD_ShowNum(
                     START_X + PROBLEM_UP_PADDING + (BOARD_UNIT * x),
                     START_Y - (BOARD_UNIT * 3) + (BOARD_UNIT * y),
-                    problem_up[x][y], 1, BLACK, WHITE
-                );
+                    problem_up[x][y], 1, BLACK, WHITE);
         }
     }
 
@@ -138,9 +172,59 @@ void drawProblem(void)
         {
             if (problem_left[x][y] != 0)
                 LCD_ShowNum(START_X - PROBLEM_LEFT_PADDING + (BOARD_UNIT * y),
-                START_Y + (BOARD_UNIT * x),
-                problem_left[x][y], 1, BLACK, WHITE
-            );
+                            START_Y + (BOARD_UNIT * x),
+                            problem_left[x][y], 1, BLACK, WHITE);
         }
+    }
+}
+
+int checkCorrect()
+{
+
+    for (int i = 0; i < BOARD_ROW_SIZE; i++)
+    {
+        for (int j = 0; j < BOARD_ROW_SIZE; j++)
+        {
+            if (boardState[i][j] != correct1[i][j])
+            {
+                return FALSE;
+            }
+        }
+    }
+
+    return TRUE;
+}
+
+void setBlockColor()
+{
+    if (boardState[current_xPoint - 1][current_yPoint - 1])
+    {
+        // Black -> White
+        boardState[current_xPoint - 1][current_yPoint - 1] = FALSE;
+        LCD_Fill(START_X + (current_xPoint - 1) * BOARD_UNIT, START_Y + (current_yPoint - 1) * BOARD_UNIT, START_X + (current_xPoint)*BOARD_UNIT, START_Y + (current_yPoint)*BOARD_UNIT, WHITE);
+        LCD_DrawRectangle(START_X + (current_xPoint - 1) * BOARD_UNIT, START_Y + (current_yPoint - 1) * BOARD_UNIT, START_X + (current_xPoint)*BOARD_UNIT, START_Y + (current_yPoint)*BOARD_UNIT);
+    }
+    else
+    {
+        // White -> Black
+        boardState[current_xPoint - 1][current_yPoint - 1] = TRUE;
+        LCD_Fill(START_X + (current_xPoint - 1) * BOARD_UNIT, START_Y + (current_yPoint - 1) * BOARD_UNIT, START_X + (current_xPoint)*BOARD_UNIT, START_Y + (current_yPoint)*BOARD_UNIT, BLACK);
+        LCD_DrawRectangle(START_X + (current_xPoint - 1) * BOARD_UNIT, START_Y + (current_yPoint - 1) * BOARD_UNIT, START_X + (current_xPoint)*BOARD_UNIT, START_Y + (current_yPoint)*BOARD_UNIT);
+    }
+}
+
+void selectColorBlock(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)
+{
+    if (EXTI_GetITStatus(EXTI_Line) != RESET)
+    {
+        if (GPIO_ReadInputDataBit(GPIOx, GPIO_Pin) == Bit_RESET)
+        {
+            setBlockColor();
+            if (checkCorrect())
+            {
+                LCD_Clear(WHITE);
+            }
+        }
+        EXTI_ClearITPendingBit(EXTI_Line);
     }
 }

@@ -76,17 +76,17 @@ void EXTI15_10_IRQHandler(void)
 {
     switch (stateScreen)
     {
-    case SCR_MAIN:
-        selectMainScreen(EXTI_Line11, GPIOD, GPIO_Pin_11);
-        backScreen(EXTI_Line12, GPIOD, GPIO_Pin_12);
-        break;
-    case SCR_PAGE:
-        selectStageScreen(EXTI_Line11, GPIOD, GPIO_Pin_11);
-        backScreen(EXTI_Line12, GPIOD, GPIO_Pin_12);
-        break;
-    case SCR_GAME:
-        break;
-    }
+        case SCR_MAIN:
+            selectMainScreen(EXTI_Line11, GPIOD, GPIO_Pin_11);
+            backScreen(EXTI_Line12, GPIOD, GPIO_Pin_12);
+            break;
+        case SCR_PAGE:
+            selectStageScreen(EXTI_Line11, GPIOD, GPIO_Pin_11);
+            backScreen(EXTI_Line12, GPIOD, GPIO_Pin_12);
+            break;
+        case SCR_GAME:
+            selectColorBlock(EXTI_Line11, GPIOD, GPIO_Pin_11);
+            break;
 }
 
 extern uint32_t Music;
