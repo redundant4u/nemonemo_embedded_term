@@ -9,7 +9,7 @@ int main(void)
   LCD_Init();
   LCD_Clear(WHITE);
 
-  mainScreen();
+  mainScreen(SCREEN_DISPLAY);
 
   while (1)
   {
