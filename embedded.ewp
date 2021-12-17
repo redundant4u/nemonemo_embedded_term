@@ -658,7 +658,7 @@
             <data>
                 <extensions></extensions>
                 <cmdline></cmdline>
-                <hasPrio>0</hasPrio>
+                <hasPrio>80</hasPrio>
                 <buildSequence>inputOutputBased</buildSequence>
             </data>
         </settings>
@@ -1008,23 +1008,23 @@
                 </option>
                 <option>
                     <name>IlinkLogCrtRoutineSelection</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>IlinkLogFragmentInfo</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>IlinkLogInlining</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>IlinkLogMerging</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>IlinkDemangle</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
             </data>
         </settings>
@@ -2305,6 +2305,12 @@
             <name>$PROJ_DIR$\user\bluetooth.c</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\user\bgm.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\user\bgm.h</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\user\config.c</name>
         </file>
         <file>
@@ -2327,6 +2333,12 @@
         </file>
         <file>
             <name>$PROJ_DIR$\user\stm32f10x_it.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\user\util.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\user\util.h</name>
         </file>
     </group>
 </project>
