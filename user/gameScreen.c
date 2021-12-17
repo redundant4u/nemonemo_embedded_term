@@ -54,7 +54,7 @@ int correct1[BOARD_ROW_SIZE][BOARD_ROW_SIZE] = {
 
 void gameScreen(void)
 {
-    char msgGameStart[] = "GAME START";
+    char msgGameStart[] = "0\n";
     BluetoothSendString(msgGameStart, sizeof(msgGameStart));
     LCD_Clear(WHITE);
     selectBlock(current_xPoint, current_yPoint);
