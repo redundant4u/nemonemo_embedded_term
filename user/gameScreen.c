@@ -258,7 +258,7 @@ void selectColorBlock(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin
         if (GPIO_ReadInputDataBit(GPIOx, GPIO_Pin) == Bit_RESET)
         {
             setBlockColor();
-            screenDelay();
+            delayScreen(20);
                 
             if (checkCorrect())
             {

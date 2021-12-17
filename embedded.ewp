@@ -658,7 +658,7 @@
             <data>
                 <extensions></extensions>
                 <cmdline></cmdline>
-                <hasPrio>80</hasPrio>
+                <hasPrio>1</hasPrio>
                 <buildSequence>inputOutputBased</buildSequence>
             </data>
         </settings>
@@ -2207,6 +2207,9 @@
                     <name>$PROJ_DIR$\Libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\stm32f10x_spi.h</name>
                 </file>
                 <file>
+                    <name>$PROJ_DIR$\Libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\stm32f10x_systick.h</name>
+                </file>
+                <file>
                     <name>$PROJ_DIR$\Libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\stm32f10x_tim.h</name>
                 </file>
                 <file>
@@ -2279,6 +2282,9 @@
                     <name>$PROJ_DIR$\Libraries\STM32F10x_StdPeriph_Driver_v3.5\src\stm32f10x_spi.c</name>
                 </file>
                 <file>
+                    <name>$PROJ_DIR$\Libraries\STM32F10x_StdPeriph_Driver_v3.5\src\stm32f10x_systick.c</name>
+                </file>
+                <file>
                     <name>$PROJ_DIR$\Libraries\STM32F10x_StdPeriph_Driver_v3.5\src\stm32f10x_tim.c</name>
                 </file>
                 <file>
@@ -2333,9 +2339,6 @@
         </file>
         <file>
             <name>$PROJ_DIR$\user\util.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\user\util.h</name>
         </file>
     </group>
 </project>

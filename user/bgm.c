@@ -1,4 +1,4 @@
-#include "stm32f10x.h"
+#include "nemo.h"
 #include "bgm.h"
 
 uint32_t Music = 0;
@@ -7,27 +7,35 @@ uint32_t Sound = 0;
 void bgmStart(void)
 {
   int notes[] = {
-    SOL, SOL, MI, MI, PA, PA, REST,
-    SOL, SOL, MI, MI, PA, PA, REST,
-    DO, DO, PA, PA, RA_SHARP, RA_SHARP, REST,
-    DO, DO, PA, PA, RA_SHARP, RA_SHARP, REST,
-    RA_SHARP, RA, SOL_SHARP, SOL,
-    RA_SHARP, RA, RE_SHARP, RE, SOL_SHARP,
-    SOL, DO, SI, RA_SHARP, PA, MI, RE_SHARP, REST,
-    RA_SHARP, PA_SHARP, PA, MI, RE_SHARP, REST
+    MI, MI, MI, SHORT, MI, MI, MI, SHORT, MI, SOL, DO, RE, MI, LONG,
+    PA, PA, PA, PA, PA, MI, MI, MI, MI, RE, RE, MI, RE, SHORT, SOL, SHORT,
+    MI, MI, MI, SHORT, MI, MI, MI, SHORT, MI, SOL, DO, RE, MI, LONG,
+    PA, PA, PA, PA, PA, MI, MI, MI, SOL, SOL, PA, RE, DO, LONG,
+    
+    LONG
+
+    //SOL, RA, SOL, MI, HIGH_DO, RA, SOL, SOL, RA, SOL, RA, SOL, HIGH_DO, SI,
+    //PA, SOL, PA, RE, SI, RA, SOL, SOL, RA, SOL, RA, SOL, RA, MI,
+    //SOL, RA, SOL, MI, HIGH_DO, RA, SOL, SOL, RA, SOL, RA, SOL, HIGH_DO, SI,
+    //PA, SOL, PA, RE, SI, RA, SOL, SOL, RA, SOL, RA, SOL, RE, HIGH_DO,
+    //RA, RA, DO, RA, SOL, MI, SOL, PA, RA, SOL, PA, MI,
+    //RE, MI, SOL, RA, SI, SI, SI, DO, DO, SI, RA, SOL, PA, RE
   };
             
-  for (int i = 0; i < 51; i++)
+  for (int i = 0; i < sizeof(notes) / sizeof(int); i++)
   {
-    Music = notes[i];
-    
-    if(notes[i] == REST)
+    if(notes[i] == LONG)
     {
-      for(int j = 0; j < 700000; j++) {}
-    } else {
-      for(int j = 0; j < 300000; j++) {}
       Music = REST;
-      for(int j = 0; j < 300000; j++) {}
+      delayScreen(100);
+    } else if(notes[i] == SHORT){
+      Music = REST;
+      delayScreen(50);
+    } else {
+      Music = notes[i];
+      delayScreen(20);
+      Music = REST;
+      delayScreen(20);
     }
   }
 }

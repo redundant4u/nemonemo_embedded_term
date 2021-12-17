@@ -1,5 +1,4 @@
 #include "nemo.h"
-#include "util.h"
 
 extern int stateScreen;
 
@@ -107,5 +106,15 @@ void TIM2_IRQHandler(void)
             GPIOB->ODR ^= GPIO_Pin_0;
             Sound = 0;
         }
+    }
+}
+
+extern volatile uint32_t Delay;
+
+void SysTick_Handler(void)
+{
+    if(Delay != 0x00)
+    {
+        Delay--;
     }
 }

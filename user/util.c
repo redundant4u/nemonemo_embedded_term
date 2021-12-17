@@ -1,10 +1,17 @@
 #include "nemo.h"
 
 extern int stateScreen;
+volatile uint32_t Delay;
 
-void screenDelay(void)
+void delayScreen(__IO uint32_t nTime)
 {
-    for(int i = 0; i < 1000000; i++) {}
+    SysTick_CounterCmd(SysTick_Counter_Enable);
+
+    Delay = nTime;
+    while(Delay != 0);
+
+    SysTick_CounterCmd(SysTick_Counter_Disable);
+    SysTick_CounterCmd(SysTick_Counter_Clear);
 }
 
 void backScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)

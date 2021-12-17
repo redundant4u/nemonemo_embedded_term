@@ -6,6 +6,7 @@
 #include "stm32f10x_adc.h"
 #include "stm32f10x_dma.h"
 #include "stm32f10x_tim.h"
+#include "stm32f10x_systick.h"
 #include "core_cm3.h"
 #include "misc.h"
 #include "lcd.h"
@@ -56,5 +57,5 @@ void selectColorBlock(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin
 void bgmStart(void);
 
 // util.c
-void screenDelay(void);
+void delayScreen(__IO uint32_t nTime);
 void backScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);

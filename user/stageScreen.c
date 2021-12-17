@@ -56,7 +56,7 @@ void selectStageScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pi
                 gameScreen();
                 stateScreen = SCR_GAME;
 
-                screenDelay();
+                delayScreen(20);
                 break;
             }
         }
