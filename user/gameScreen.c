@@ -54,8 +54,11 @@ int correct1[BOARD_ROW_SIZE][BOARD_ROW_SIZE] = {
 
 void gameScreen(void)
 {
-    char msgGameStart[] = "0\n";
-    BluetoothSendString(msgGameStart, sizeof(msgGameStart));
+    memset(boardState, 0, 100);
+    // char msgGameStart[] = "0\n";
+    // BluetoothSendString(msgGameStart, sizeof(msgGameStart));
+    int percent = checkCorrect();
+    BluetoothSendInt(percent);
     LCD_Clear(WHITE);
     selectBlock(current_xPoint, current_yPoint);
     stateScreen = SCR_GAME;
@@ -213,18 +216,16 @@ void drawProblem(void)
 
 int checkCorrect()
 {
+    int correctCount = 0;
     for (int i = 0; i < BOARD_ROW_SIZE; i++)
     {
         for (int j = 0; j < BOARD_ROW_SIZE; j++)
         {
-            if (boardState[i][j] != correct1[i][j])
-            {
-                return FALSE;
-            }
+            if (boardState[i][j] == correct1[i][j])
+                correctCount++;
         }
     }
-
-    return TRUE;
+    return correctCount;
 }
 
 void setBlockColor(void)
@@ -254,9 +255,12 @@ void selectColorBlock(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin
             setBlockColor();
             screenDelay();
 
-            if (checkCorrect())
+            int percent = checkCorrect();
+            BluetoothSendInt(percent);
+            if (percent == 100)
             {
-                LCD_Clear(WHITE);
+                stateScreen = SCR_CLEAR;
+                printClearScreen();
             }
         }
         EXTI_ClearITPendingBit(EXTI_Line);

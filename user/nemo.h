@@ -1,3 +1,4 @@
+#include <string.h>
 #include "stm32f10x.h"
 #include "stm32f10x_gpio.h"
 #include "stm32f10x_rcc.h"
@@ -25,7 +26,7 @@
 #define SCREEN_CLEAR    1
 
 // stateScreen
-enum { SCR_MAIN = 0, SCR_PAGE, SCR_GAME, SCR_BGM };
+enum { SCR_MAIN = 0, SCR_PAGE, SCR_GAME, SCR_BGM, SCR_CLEAR };
 
 // config.c
 void configure();
@@ -52,6 +53,7 @@ void gameScreen();
 // bluetooth.c
 void initBluetooth(void);
 void BluetoothSendString(char *string, int length);
+void BluetoothSendInt(int num);
 void joystickGameScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
 void selectGameScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
 void gameScreen(void);
@@ -63,3 +65,7 @@ void bgmStart(void);
 // util.c
 void screenDelay(void);
 void backScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+
+// clear.c
+void printClearScreen();
+void selectClearScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);

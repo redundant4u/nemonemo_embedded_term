@@ -124,13 +124,27 @@ void sendDataUART2(uint16_t data)
     USART_SendData(USART1, data);
 }
 
-void BluetoothSendString(char *string, int length)
+void BluetoothSendString(char *str, int length)
 {
     for (int i = 0; i < length - 1; i++)
     {
         while (USART_GetFlagStatus(USART2, USART_FLAG_TXE) == RESET)
             ;
-        uint16_t data = string[i];
+        uint16_t data = str[i];
+        USART_SendData(USART2, data);
+    }
+}
+
+void BluetoothSendInt(int num)
+{
+    char str[10];              // 변환한 문자열을 저장할 배열
+    sprintf(str, "%d\n", num); // %d를 지정하여 정수를 문자열로 저장
+
+    for (int i = 0; i < str[i] != 0; i++)
+    {
+        while (USART_GetFlagStatus(USART2, USART_FLAG_TXE) == RESET)
+            ;
+        uint16_t data = str[i];
         USART_SendData(USART2, data);
     }
 }

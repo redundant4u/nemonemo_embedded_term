@@ -88,6 +88,8 @@ void EXTI15_10_IRQHandler(void)
             selectColorBlock(EXTI_Line11, GPIOD, GPIO_Pin_11);
             backScreen(EXTI_Line12, GPIOD, GPIO_Pin_12);
             break;
+        case SCR_CLEAR:
+            selectClearScreen(EXTI_Line11, GPIOD, GPIO_Pin_11);
     }
 }
 

@@ -7,7 +7,7 @@ void screenDelay(void)
 {
     SysTick_CounterCmd(SysTick_Counter_Enable);
 
-    Delay = 5; // 5ms
+    Delay = 20; // 5ms
     while(Delay != 0);
 
     SysTick_CounterCmd(SysTick_Counter_Disable);
