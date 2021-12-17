@@ -11,6 +11,10 @@
 #define RA        114
 #define RA_SHARP  107
 #define SI        101
-#define HIGH_DO   961
+#define HIGH_DO   96
+#define HIGH_RE   89
+
+#define SHORT     1
+#define LONG      2
 
 void bgmStart(void);

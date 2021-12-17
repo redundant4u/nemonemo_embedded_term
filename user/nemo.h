@@ -6,6 +6,7 @@
 #include "stm32f10x_adc.h"
 #include "stm32f10x_dma.h"
 #include "stm32f10x_tim.h"
+#include "stm32f10x_systick.h"
 #include "core_cm3.h"
 #include "misc.h"
 #include "lcd.h"

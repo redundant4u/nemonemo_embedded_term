@@ -4,9 +4,8 @@ void RCC_Configure(void)
 {
     // buzzer PB0
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
 
-    // S1 Button PD11
+    // S1 Button PD11, PD12
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD, ENABLE);
 
     // Joystick PC2, 3, 4, 5
@@ -14,6 +13,9 @@ void RCC_Configure(void)
 
     // Alter function
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
+
+    // timer for buzzer
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
 }
 
 void GPIO_Configure(void)
@@ -97,7 +99,7 @@ void NVIC_Configure(void)
 
     // buzzer
     NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
-    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
     NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
     NVIC_Init(&NVIC_InitStructure);
@@ -143,8 +145,8 @@ void TIM_Configure(void)
 {
     TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;
 
-    TIM_TimeBaseInitStructure.TIM_Period = 10;
-    TIM_TimeBaseInitStructure.TIM_Prescaler = 35;
+    TIM_TimeBaseInitStructure.TIM_Period = 5;
+    TIM_TimeBaseInitStructure.TIM_Prescaler = 107;
     TIM_TimeBaseInitStructure.TIM_ClockDivision = 0;
     TIM_TimeBaseInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
     TIM_TimeBaseInit(TIM2, &TIM_TimeBaseInitStructure);
@@ -152,6 +154,12 @@ void TIM_Configure(void)
     TIM_Cmd(TIM2, ENABLE);
 
     TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
+}
+
+void SysTick_Configure(void)
+{
+    SysTick_SetReload(72000);
+    SysTick_ITConfig(ENABLE);
 }
 
 void configure()
@@ -163,4 +171,5 @@ void configure()
     NVIC_Configure();
     initBluetooth();
     TIM_Configure();
+    SysTick_Configure();
 }

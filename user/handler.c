@@ -109,3 +109,13 @@ void TIM2_IRQHandler(void)
         }
     }
 }
+
+extern volatile uint32_t Delay;
+
+void SysTick_Handler(void)
+{
+    if(Delay != 0x00)
+    {
+        Delay--;
+    }
+}
