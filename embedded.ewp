@@ -2323,6 +2323,12 @@
             <name>$PROJ_DIR$\user\config.c</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\user\game.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\user\game.h</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\user\gameScreen.c</name>
         </file>
         <file>
@@ -2336,12 +2342,6 @@
         </file>
         <file>
             <name>$PROJ_DIR$\user\nemo.h</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\user\stage.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\user\stage.h</name>
         </file>
         <file>
             <name>$PROJ_DIR$\user\stageScreen.c</name>

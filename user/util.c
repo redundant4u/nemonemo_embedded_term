@@ -31,6 +31,7 @@ void backScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)
                 break;
             case SCR_GAME:
                 // gameScreen(SCREEN_CLEAR);
+                LCD_Clear(WHITE);
                 stageScreen(SCREEN_DISPLAY);
                 stateScreen--;
                 break;

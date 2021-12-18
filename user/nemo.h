@@ -1,4 +1,3 @@
-#include <string.h>
 #include "stm32f10x.h"
 #include "stm32f10x_gpio.h"
 #include "stm32f10x_rcc.h"
@@ -11,7 +10,6 @@
 #include "core_cm3.h"
 #include "misc.h"
 #include "lcd.h"
-#include "touch.h"
 
 #define UP      (uint16_t) 0x0020
 #define LEFT    (uint16_t) 0x0008
@@ -20,22 +18,10 @@
 
 #define STAGE_MAX 6
 
-#define MAINSCREEN_TEXT_SIZE        20
+#define MAINSCREEN_TEXT_SIZE    20
 
 #define SCREEN_DISPLAY  0
 #define SCREEN_CLEAR    1
-
-#define BOARD_UNIT 16
-#define BOARD_ROW_SIZE 10
-
-#define PROBLEM_MAX_X 10
-#define PROBLEM_MAX_Y 3
-
-#define BOARD_END_X 210
-#define BOARD_END_Y 270
-
-#define PROBLEM_UP_PADDING 5
-#define PROBLEM_LEFT_PADDING 40
 
 // stateScreen
 enum { SCR_MAIN = 0, SCR_PAGE, SCR_GAME, SCR_BGM, SCR_CLEAR };
