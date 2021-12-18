@@ -194,8 +194,8 @@ void TIM_Configure(void)
 {
     TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;
 
-    TIM_TimeBaseInitStructure.TIM_Period = 5;
-    TIM_TimeBaseInitStructure.TIM_Prescaler = 107;
+    TIM_TimeBaseInitStructure.TIM_Period = 2;
+    TIM_TimeBaseInitStructure.TIM_Prescaler = 200;
     TIM_TimeBaseInitStructure.TIM_ClockDivision = 0;
     TIM_TimeBaseInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
     TIM_TimeBaseInit(TIM2, &TIM_TimeBaseInitStructure);

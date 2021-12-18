@@ -61,7 +61,7 @@ void selectColorBlock(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin
 void bgmStart(void);
 
 // util.c
-void screenDelay(void);
+void delayScreen(__IO uint32_t nTime);
 void backScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
 
 // clear.c

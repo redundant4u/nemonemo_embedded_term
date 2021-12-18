@@ -3,11 +3,11 @@
 extern int stateScreen;
 volatile uint32_t Delay;
 
-void screenDelay(void)
+void delayScreen(__IO uint32_t nTime)
 {
     SysTick_CounterCmd(SysTick_Counter_Enable);
 
-    Delay = 20; // 5ms
+    Delay = nTime;
     while(Delay != 0);
 
     SysTick_CounterCmd(SysTick_Counter_Disable);

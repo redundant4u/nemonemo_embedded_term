@@ -1,4 +1,4 @@
-#include "stm32f10x.h"
+#include "nemo.h"
 #include "bgm.h"
 
 uint32_t Music = 0;
@@ -24,19 +24,18 @@ void bgmStart(void)
             
   for (int i = 0; i < sizeof(notes) / sizeof(int); i++)
   {
-    //screenDelay();
     if(notes[i] == LONG)
     {
       Music = REST;
-      for(int j = 0; j < 2200000; j++) {}
+      delayScreen(100);
     } else if(notes[i] == SHORT){
       Music = REST;
-      for(int j = 0; j < 1000000; j++) {}
+      delayScreen(50);
     } else {
       Music = notes[i];
-      for(int j = 0; j < 600000; j++) {}
+      delayScreen(20);
       Music = REST;
-      for(int j = 0; j < 600000; j++) {}
+      delayScreen(20);
     }
   }
 }

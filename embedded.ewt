@@ -3099,8 +3099,5 @@
         <file>
             <name>$PROJ_DIR$\user\util.c</name>
         </file>
-        <file>
-            <name>$PROJ_DIR$\user\util.h</name>
-        </file>
     </group>
 </project>

@@ -1,5 +1,4 @@
 #include "nemo.h"
-#include "util.h"
 
 extern int stateScreen;
 

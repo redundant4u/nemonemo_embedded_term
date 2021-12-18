@@ -54,7 +54,7 @@ void selectMainScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin
                 stageScreen(SCREEN_DISPLAY);
                 stateScreen = SCR_PAGE;
 
-                screenDelay();
+                delayScreen(20);
                 break;
             }
         }

@@ -23,13 +23,6 @@
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
-/* SysTick clock source */
-#define SysTick_CLKSource_HCLK_Div8    ((u32)0xFFFFFFFB)
-#define SysTick_CLKSource_HCLK         ((u32)0x00000004)
-
-#define IS_SYSTICK_CLK_SOURCE(SOURCE) ((SOURCE == SysTick_CLKSource_HCLK) || \
-                                       (SOURCE == SysTick_CLKSource_HCLK_Div8))
-
 /* SysTick counter state */
 #define SysTick_Counter_Disable        ((u32)0xFFFFFFFE)
 #define SysTick_Counter_Enable         ((u32)0x00000001)
