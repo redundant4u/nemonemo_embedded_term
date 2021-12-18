@@ -1,13 +1,9 @@
+
 #include "nemo.h"
 
 #define STAGE_PADDING_SIZE  50
 #define STAGE_PAGE1_X       100
 #define STAGE_PAGE1_Y       70
-
-enum
-{
-    GAMESTAGE1
-};
 
 int stageNumber = 0;
 extern int stateScreen;
@@ -49,16 +45,12 @@ void selectStageScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pi
     {
         if (GPIO_ReadInputDataBit(GPIOx, GPIO_Pin) == Bit_RESET)
         {
-            switch (stageNumber)
-            {
-            case GAMESTAGE1:
-                stageScreen(SCREEN_CLEAR);
-                gameScreen();
-                stateScreen = SCR_GAME;
+            stageScreen(SCREEN_CLEAR);
+            gameScreen();
+            stateScreen = SCR_GAME;
 
-                delayScreen(20);
-                break;
-            }
+            delayScreen(20);
+
         }
         EXTI_ClearITPendingBit(EXTI_Line);
     }
