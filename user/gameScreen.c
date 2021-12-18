@@ -15,39 +15,12 @@ int boardState[BOARD_ROW_SIZE][BOARD_ROW_SIZE] = {
     FALSE,
 };
 
-/*
-int correct1[BOARD_ROW_SIZE][BOARD_ROW_SIZE] = { 
-        {0, 0, 0, 1, 0,   0, 0, 1, 1, 1},
-        {0, 0, 1, 0, 0,   0, 0, 0, 1, 1},
-        {0,1,1,0,0   ,1,0,0,0,1},
-        {1,1,1,0,0   ,0,0,0,0,0},
-        {1,1,1,1,0   ,0,0,0,0,0},
-        {1,1,1,1,1   ,1,0,0,0,0},
-        {1,1,1,1,1   ,1,1,0,0,0},
-        {0,1,1,1,0   ,1,1,0,0,1},
-        {0,0,1,1,1   ,1,1,0,1,1},
-        {0,0,0,1,1   ,1,0,1,1,1}
-
-        {1,1,1,1,1, 1,1,1,1,1},
-            {1,0,0,0,0, 0,0,0,0,1},
-            {1,0,0,0,0, 0,0,0,0,1},
-            {1,0,0,0,0, 0,0,0,0,1},
-            {1,0,0,0,0, 0,0,0,0,1},
-            {1,0,0,0,0, 0,0,0,0,1},
-            {1,0,0,0,0, 0,0,0,0,1},
-            {1,0,0,0,0, 0,0,0,0,1},
-            {1,0,0,0,0, 0,0,0,0,1},
-            {1,1,1,1,1, 1,1,1,1,1}
-};
-*/
-
 void gameScreen(void)
 {
     memset(boardState, 0, 100);
-    // char msgGameStart[] = "0\n";
-    // BluetoothSendString(msgGameStart, sizeof(msgGameStart));
     int percent = checkCorrect();
     BluetoothSendInt(percent);
+ 
     LCD_Clear(WHITE);
     selectBlock(current_xPoint, current_yPoint);
     stateScreen = SCR_GAME;

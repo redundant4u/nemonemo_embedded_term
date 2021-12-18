@@ -18,3 +18,5 @@ typedef struct _Game {
     int problem_up[PROBLEM_MAX_X][PROBLEM_MAX_Y];
     int problem_left[PROBLEM_MAX_X][PROBLEM_MAX_Y];
 } Game;
+
+int checkCorrect(void);
