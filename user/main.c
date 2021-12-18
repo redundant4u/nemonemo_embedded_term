@@ -2,13 +2,6 @@
 
 int stateScreen = SCR_MAIN;
 
-void Delay(int n)
-{
-  time_t current = clock();
-  while (clock() - current < n)
-    ;
-}
-
 int main(void)
 {
   configure();
@@ -16,9 +9,10 @@ int main(void)
   LCD_Init();
   LCD_Clear(WHITE);
 
-  mainScreen();
+  mainScreen(SCREEN_DISPLAY);
 
   while (1)
   {
+    bgmStart();
   }
 }

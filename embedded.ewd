@@ -44,7 +44,7 @@
                 </option>
                 <option>
                     <name>MemFile</name>
-                    <state>$TOOLKIT_DIR$\CONFIG\debugger\ST\STM32F107VC.ddf</state>
+                    <state></state>
                 </option>
                 <option>
                     <name>RunToEnable</name>
@@ -88,7 +88,7 @@
                 </option>
                 <option>
                     <name>OCLastSavedByProductVersion</name>
-                    <state>9.20.1.43525</state>
+                    <state>9.10.2.39304</state>
                 </option>
                 <option>
                     <name>UseFlashLoader</name>
@@ -112,7 +112,7 @@
                 </option>
                 <option>
                     <name>FlashLoadersV3</name>
-                    <state>$TOOLKIT_DIR$\config\flashloader\ST\FlashSTM32F105xC.board</state>
+                    <state>$TOOLKIT_DIR$\config\flashloader\</state>
                 </option>
                 <option>
                     <name>OCImagesSuppressCheck1</name>
@@ -1292,7 +1292,7 @@
             <name>XDS100_ID</name>
             <archiveVersion>2</archiveVersion>
             <data>
-                <version>9</version>
+                <version>8</version>
                 <wantNonLocal>1</wantNonLocal>
                 <debug>1</debug>
                 <option>
@@ -1464,10 +1464,6 @@
                 </option>
                 <option>
                     <name>OCXDSDigitalStatesConfigFile</name>
-                    <state>1</state>
-                </option>
-                <option>
-                    <name>OCSelectedCoreName</name>
                     <state>1</state>
                 </option>
             </data>
@@ -2822,7 +2818,7 @@
             <name>XDS100_ID</name>
             <archiveVersion>2</archiveVersion>
             <data>
-                <version>9</version>
+                <version>8</version>
                 <wantNonLocal>1</wantNonLocal>
                 <debug>0</debug>
                 <option>
@@ -2994,10 +2990,6 @@
                 </option>
                 <option>
                     <name>OCXDSDigitalStatesConfigFile</name>
-                    <state>1</state>
-                </option>
-                <option>
-                    <name>OCSelectedCoreName</name>
                     <state>1</state>
                 </option>
             </data>

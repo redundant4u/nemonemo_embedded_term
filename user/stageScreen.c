@@ -1,4 +1,9 @@
+
 #include "nemo.h"
+
+#define STAGE_PADDING_SIZE  50
+#define STAGE_PAGE1_X       100
+#define STAGE_PAGE1_Y       70
 
 int stageNumber = 0;
 extern int stateScreen;
@@ -11,30 +16,24 @@ void joystickStageScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_
         {
             switch (GPIO_Pin)
             {
-                // TODO :: dsdfsdfsd
-                // NOTE : dsfsdff
-            case GPIO_Pin_4:
-                //Right
+            case RIGHT:
                 stageNumber++;
                 break;
-            case GPIO_Pin_3:
-                //Left
+            case LEFT:
                 stageNumber--;
                 break;
-            case GPIO_Pin_5:
-                //Up
+            case UP:
                 stageNumber -= 3;
                 break;
-            case GPIO_Pin_2:
-                //Down
+            case DOWN:
                 stageNumber += 3;
                 break;
             }
-            if (stageNumber >= STAGE_MAX)
-                stageNumber -= STAGE_MAX;
-            if (stageNumber < 0)
-                stageNumber += STAGE_MAX;
-            stageScreen();
+
+            if (stageNumber >= STAGE_MAX) stageNumber -= STAGE_MAX;
+            if (stageNumber < 0)          stageNumber += STAGE_MAX;
+
+            stageScreen(SCREEN_DISPLAY);
         }
         EXTI_ClearITPendingBit(EXTI_Line);
     }
@@ -46,42 +45,45 @@ void selectStageScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pi
     {
         if (GPIO_ReadInputDataBit(GPIOx, GPIO_Pin) == Bit_RESET)
         {
-            switch (stageNumber)
-            {
-            case 0:
-              gameScreen();
-              stateScreen = SCR_GAME;
-              break;
-              /*
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-            */
-            }
+            stageScreen(SCREEN_CLEAR);
+            gameScreen();
+            stateScreen = SCR_GAME;
+
+            screenDelay();
+
         }
         EXTI_ClearITPendingBit(EXTI_Line);
     }
 }
 
-void stageScreen(void)
+void stageScreen(int mode)
 {
-    int PointX[3] = {20, 90, 170};
-    int PointY[2] = {120, 190};
-    int lineLength = 50;
+    int pointX[3] = { 20, 90, 170 };
+    int pointY[2] = { 120, 190 };
+    int textColor[2] = { BLACK, WHITE };
+    int stageColor[2] = { GREEN, WHITE };
+    int selectColor[2] = { BLUE, WHITE };
 
-    int StageSel[6][2] = {{0, 0}, {1, 0}, {2, 0}, {0, 1}, {1, 1}, {2, 1}};
+    int stageSel[6][2] = { {0, 0}, {1, 0}, {2, 0}, {0, 1}, {1, 1}, {2, 1} };
 
-    LCD_Clear(WHITE);
-    LCD_ShowString(STAGE_PAGE1_X, STAGE_PAGE1_Y, "PAGE 1", BLACK, WHITE);
+    LCD_ShowString(STAGE_PAGE1_X, STAGE_PAGE1_Y, "PAGE 1", textColor[mode], WHITE);
     for (int i = 0; i < 3; i++)
     {
         for (int j = 0; j < 2; j++)
         {
-            //LCD_DrawRectangle(PointX[i], PointY[j], PointX[i]+lineLength, PointY[j]+lineLength);
-            LCD_Fill(PointX[i], PointY[j], PointX[i] + lineLength, PointY[j] + lineLength, GREEN);
+            LCD_Fill(
+                pointX[i],
+                pointY[j],
+                pointX[i] + STAGE_PADDING_SIZE, pointY[j] + STAGE_PADDING_SIZE,
+                stageColor[mode]
+            );
         }
     }
-    LCD_Fill(PointX[StageSel[stageNumber][0]], PointY[StageSel[stageNumber][1]], PointX[StageSel[stageNumber][0]] + lineLength, PointY[StageSel[stageNumber][1]] + lineLength, BLUE);
+    LCD_Fill(
+        pointX[stageSel[stageNumber][0]],
+        pointY[stageSel[stageNumber][1]],
+        pointX[stageSel[stageNumber][0]] + STAGE_PADDING_SIZE,
+        pointY[stageSel[stageNumber][1]] + STAGE_PADDING_SIZE,
+        selectColor[mode]
+    );
 }
