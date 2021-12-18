@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "nemo.h"
 
 void USART1_Init(void)
@@ -88,8 +89,8 @@ void BluetoothSendInt(int num)
 void bluetoothSetting(void)
 {
     // Set Bluetooth Config
-    char msgSetName[] = "AT+BTNAME=NemoLogic\r";
-    char msgSetKey[] = "AT+BTKEY=1234\r";
+    // char msgSetName[] = "AT+BTNAME=NemoLogic\r";
+    // char msgSetKey[] = "AT+BTKEY=1234\r";
     char msgScan[] = "AT+BTSCAN\r";
 
     // BluetoothSendString(msgSetName, sizeof(msgSetName));

@@ -1,4 +1,5 @@
 #include "nemo.h"
+#include "game.h"
 
 extern int stateScreen;
 volatile uint32_t Delay;
