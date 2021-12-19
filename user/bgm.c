@@ -1,11 +1,16 @@
 #include "nemo.h"
 #include "bgm.h"
 
+// timer interrupt를 위한 전역 변수
 uint32_t Music = 0;
 uint32_t Sound = 0;
 
+// 노래 재생 함수
 void bgmStart(void)
 {
+  // 노래 음표 변수
+  // SHORT: 짧게 쉬기
+  // LONG: 길게 쉬기
   int notes[] = {
     MI, MI, MI, SHORT, MI, MI, MI, SHORT, MI, SOL, DO, RE, MI, LONG,
     PA, PA, PA, PA, PA, MI, MI, MI, MI, RE, RE, MI, RE, SHORT, SOL, SHORT,
@@ -13,17 +18,12 @@ void bgmStart(void)
     PA, PA, PA, PA, PA, MI, MI, MI, SOL, SOL, PA, RE, DO, LONG,
     
     LONG
-
-    //SOL, RA, SOL, MI, HIGH_DO, RA, SOL, SOL, RA, SOL, RA, SOL, HIGH_DO, SI,
-    //PA, SOL, PA, RE, SI, RA, SOL, SOL, RA, SOL, RA, SOL, RA, MI,
-    //SOL, RA, SOL, MI, HIGH_DO, RA, SOL, SOL, RA, SOL, RA, SOL, HIGH_DO, SI,
-    //PA, SOL, PA, RE, SI, RA, SOL, SOL, RA, SOL, RA, SOL, RE, HIGH_DO,
-    //RA, RA, DO, RA, SOL, MI, SOL, PA, RA, SOL, PA, MI,
-    //RE, MI, SOL, RA, SI, SI, SI, DO, DO, SI, RA, SOL, PA, RE
   };
-            
+
+  // 노래 음표 갯수 만큼 반복 
   for (int i = 0; i < sizeof(notes) / sizeof(int); i++)
   {
+    // delayScreen: 노래 음표마다 끊어서 연주하기 위해 delay interrupt 활용
     if(notes[i] == LONG)
     {
       Music = REST;

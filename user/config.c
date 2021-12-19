@@ -131,6 +131,7 @@ void NVIC_Configure(void)
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 
     // buzzer
+    // 백그라운드에 상시 동작해야하므로 우선순위를 가장 높게 설정
     NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
     NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
     NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
@@ -205,6 +206,7 @@ void TIM_Configure(void)
     TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
 }
 
+// delay
 void SysTick_Configure(void)
 {
     SysTick_SetReload(72000);

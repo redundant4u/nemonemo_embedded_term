@@ -13,15 +13,18 @@ enum
     MENU_BLUETOOTH
 };
 
-int menuNumber = MENU_START;
+
+int menuNumber = MENU_START; // 메인 스크린 메뉴 위치를 위한 변수
 extern int stateScreen;
 
+// mainScreen용 조이스틱 동작 함수
 void joystickMainScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)
 {
     if (EXTI_GetITStatus(EXTI_Line) != RESET)
     {
         if (GPIO_ReadInputDataBit(GPIOx, GPIO_Pin) == Bit_RESET)
         {
+            // 조이스틱 동작 마다 필요한 변수 조절 및 선택 화살표 위치 조정하기
             switch (GPIO_Pin)
             {
             case UP:
@@ -41,12 +44,14 @@ void joystickMainScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_P
     }
 }
 
+// mainScreen용 버튼 동작 함수
 void selectMainScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)
 {
     if (EXTI_GetITStatus(EXTI_Line) != RESET)
     {
         if (GPIO_ReadInputDataBit(GPIOx, GPIO_Pin) == Bit_RESET)
         {
+            // menuNumber에 따라 해당하는 페이지 이동
             switch (menuNumber)
             {
             case MENU_START:
@@ -54,7 +59,7 @@ void selectMainScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin
                 stageScreen(SCREEN_DISPLAY);
                 stateScreen = SCR_PAGE;
 
-                delayScreen(20);
+                delayScreen(20); // 버튼 디바운싱을 위한 systick delay
                 break;
             }
         }
@@ -62,6 +67,7 @@ void selectMainScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin
     }
 }
 
+// mainScreen 선택 화살표 지우기 함수
 void clearMainScreenArrow(int clearNumber)
 {
     LCD_Fill(
@@ -71,11 +77,13 @@ void clearMainScreenArrow(int clearNumber)
     );
 }
 
+// mainScreen 선택 화살표 표시 함수
 void drawMainScreenArrow(void)
 {
     LCD_ShowString(START_ARROW_X, START_ARROW_Y + MAINSCREEN_TEXT_SIZE * menuNumber, ">>", BLACK, WHITE);
 }
 
+// mainScreen 그리기 함수
 void mainScreen(int mode)
 {
     char *MENU_TEXT[MENU_COUNT] = {"Game Start", "Bluetooth"};

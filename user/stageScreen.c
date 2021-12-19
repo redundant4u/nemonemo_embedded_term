@@ -5,15 +5,17 @@
 #define STAGE_PAGE1_X       100
 #define STAGE_PAGE1_Y       70
 
-int stageNumber = 0;
+int stageNumber = 0; // 어느 스테이지를 선택하는지 알기위한 변수
 extern int stateScreen;
 
+// stageScreen용 조이스틱 동작 함수
 void joystickStageScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)
 {
     if (EXTI_GetITStatus(EXTI_Line) != RESET)
     {
         if (GPIO_ReadInputDataBit(GPIOx, GPIO_Pin) == Bit_RESET)
         {
+            // 조이스틱 동작 마다 필요한 변수 조절 및 stage 이동 효과 표시하기
             switch (GPIO_Pin)
             {
             case RIGHT:
@@ -39,23 +41,26 @@ void joystickStageScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_
     }
 }
 
+// stageScreen용 버튼 동작 함수
 void selectStageScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)
 {
     if (EXTI_GetITStatus(EXTI_Line) != RESET)
     {
         if (GPIO_ReadInputDataBit(GPIOx, GPIO_Pin) == Bit_RESET)
         {
+            // stageNumber에 따라 해당하는 gameScreen 문제 페이지 이동 -> gameScreen에 extern int stageNumber 존재
             stageScreen(SCREEN_CLEAR);
             gameScreen();
             stateScreen = SCR_GAME;
 
-            delayScreen(20);
+            delayScreen(20); // 버튼 디바운싱을 위한 systick delay
 
         }
         EXTI_ClearITPendingBit(EXTI_Line);
     }
 }
 
+// stageScreen 그리기 함수
 void stageScreen(int mode)
 {
     int pointX[3] = { 20, 90, 170 };
