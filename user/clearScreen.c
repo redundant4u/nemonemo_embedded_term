@@ -8,8 +8,8 @@ extern int stateScreen;
 
 void clearScreen(){
     LCD_Clear(WHITE);
-    LCD_ShowString(START_TEXT_X, START_TEXT_Y,"congratulation !!!", GREEN, WHITE);
-    LCD_ShowString(START_TEXT_X, START_TEXT_Y + TEXT_SIZE*4,"CLICK TO QUIT", GREEN, WHITE);
+    LCD_ShowString(START_TEXT_X, START_TEXT_Y + TEXT_SIZE * 2,"Congratulation !!!", BLACK, WHITE);
+    LCD_ShowString(START_TEXT_X, START_TEXT_Y + TEXT_SIZE * 3,"CLICK TO QUIT", BLACK, WHITE);
 }
 
 void selectClearScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)
@@ -23,6 +23,7 @@ void selectClearScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pi
                 LCD_Clear(WHITE);
                 stageScreen(SCREEN_DISPLAY);
                 stateScreen = SCR_PAGE;
+                BluetoothSendInt(-1);
             }
         }
         EXTI_ClearITPendingBit(EXTI_Line);

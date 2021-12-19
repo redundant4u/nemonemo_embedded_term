@@ -36,6 +36,10 @@ void backScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)
                 stageScreen(SCREEN_DISPLAY);
                 stateScreen--;
                 break;
+            case SCR_CLEAR:
+                LCD_Clear(WHITE);
+                stageScreen(SCREEN_DISPLAY);
+                stateScreen = SCR_PAGE;
             }
         }
         EXTI_ClearITPendingBit(EXTI_Line);

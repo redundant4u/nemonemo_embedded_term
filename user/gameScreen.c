@@ -140,7 +140,7 @@ void selectColorBlock(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin
             if (percent == 100)
             {
                 stateScreen = SCR_CLEAR;
-                printClearScreen();
+                clearScreen();
             }
         }
         EXTI_ClearITPendingBit(EXTI_Line);

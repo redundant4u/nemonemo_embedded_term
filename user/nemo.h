@@ -27,7 +27,7 @@
 enum { SCR_MAIN = 0, SCR_PAGE, SCR_GAME, SCR_BGM, SCR_CLEAR };
 
 // config.c
-void configure();
+void configure(void);
 
 // mainScreen.c
 void joystickMainScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
@@ -46,7 +46,7 @@ void drawBoard(void);
 void drawProblem(void);
 
 // gameScreen.c
-void gameScreen();
+void gameScreen(void);
 
 // bluetooth.c
 void initBluetooth(void);
@@ -64,6 +64,9 @@ void bgmStart(void);
 void delayScreen(__IO uint32_t nTime);
 void backScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
 
-// clear.c
-void printClearScreen();
+// game.c
+int checkCorrect(void);
+
+// clearScreen.c
+void clearScreen(void);
 void selectClearScreen(uint32_t EXTI_Line, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
